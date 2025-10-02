@@ -1,6 +1,4 @@
-/**
- * Clase para manejar la conversión de expresiones y AHORA su evaluación.
- */
+
 class NotacionConverter {
     constructor() {
         this.precedencia = {
@@ -21,7 +19,7 @@ class NotacionConverter {
     }
 
     infijaAPostfija(infija) {
-        // ... (Se mantiene igual)
+       
         const pila = [];
         let postfija = [];
         const tokens = infija.match(/[a-zA-Z0-9.]+|\(|\)|\+|\-|\*|\/|\^/g) || [];
@@ -56,7 +54,7 @@ class NotacionConverter {
     }
 
     infijaAPrefija(infija) {
-        // ... (Se mantiene igual)
+      
         const infijaReversa = infija
             .split('')
             .reverse()
@@ -72,30 +70,25 @@ class NotacionConverter {
     }
     
     /**
-     * Evalúa una expresión en notación postfija usando el algoritmo de la pila.
-     * @param {string} postfija - Expresión en notación postfija.
-     * @returns {number} El resultado de la operación.
+     * 
+     * @param {string} postfija 
+     * @returns {number} 
      */
     evaluarPostfija = (postfija) => {
         const pila = [];
-        // Filtramos para asegurar que no haya tokens vacíos
         const tokens = postfija.split(' ').filter(t => t); 
 
         for (const token of tokens) {
             if (this.esOperando(token) && !isNaN(parseFloat(token))) {
-                // Si es un número, lo agregamos a la pila
                 pila.push(parseFloat(token));
             } else if (token.match(/[\+\-\*\/]/)) {
-                // Si es un operador, sacamos dos operandos
                 if (pila.length < 2) {
                     throw new Error("Expresión postfija inválida (operadores sin suficientes operandos).");
                 }
-                // Los operandos se sacan en orden inverso (segundo, primero)
                 const op2 = pila.pop(); 
                 const op1 = pila.pop();
                 let resultado = 0;
 
-                // Realizamos la operación
                 switch (token) {
                     case '+': resultado = op1 + op2; break;
                     case '-': resultado = op1 - op2; break;
@@ -107,15 +100,12 @@ class NotacionConverter {
                     default: 
                         throw new Error(`Operador desconocido: ${token}`);
                 }
-                // El resultado se vuelve a introducir en la pila
                 pila.push(resultado);
             } else if (!this.esOperando(token)) {
-                 // Manejar variables (letras) o símbolos no soportados
                  throw new Error(`Operando no numérico o símbolo no soportado: ${token}. Solo se permiten números.`);
             }
         }
 
-        // El resultado final debe ser el único elemento en la pila
         if (pila.length !== 1) {
             throw new Error("Expresión postfija incompleta o mal formada.");
         }
@@ -125,7 +115,6 @@ class NotacionConverter {
 
 const conversor = new NotacionConverter();
 
-// --- Parche de Visualización ---
 const parcheVisualizacionNumeros = (prefijaCalculada, infijaLimpia) => {
     const numerosOriginales = infijaLimpia.match(/[0-9]+/g) || [];
     
@@ -142,7 +131,6 @@ const parcheVisualizacionNumeros = (prefijaCalculada, infijaLimpia) => {
     return tokensCorregidos.join(' ');
 }
 
-// --- Función Principal ---
 const procesarOperacion = () => {
     const operacionInput = document.getElementById('operacionInput');
     const resultadoOutput = document.getElementById('resultadoOutput');
@@ -160,7 +148,6 @@ const procesarOperacion = () => {
         let resultados = {};
         let resultadoEvaluacion = null;
 
-        // 1. Conversión a Postfija y Medición
         let inicio = performance.now();
         const notacionPostfija = conversor.infijaAPostfija(notacionFijaLimpia);
         resultados.postfija = {
@@ -168,10 +155,8 @@ const procesarOperacion = () => {
             tiempo: (performance.now() - inicio) / 1000
         };
         
-        // --- NUEVO: Evaluar la operación ---
         resultadoEvaluacion = conversor.evaluarPostfija(notacionPostfija);
 
-        // 2. Conversión a Prefija y Medición
         inicio = performance.now();
         let prefijaCalculada = conversor.infijaAPrefija(notacionFijaLimpia);
         let fin = performance.now();
@@ -183,7 +168,6 @@ const procesarOperacion = () => {
             tiempo: (fin - inicio) / 1000 
         };
         
-        // 3. Formato de Salida (Añade el resultado de la evaluación)
         const salida = `
 
 
@@ -199,7 +183,6 @@ notacion postfija: ${resultados.postfija.notacion} (Tiempo: ${resultados.postfij
         resultadoOutput.textContent = salida;
 
     } catch (error) {
-        // Mostrar errores específicos (división por cero, sintaxis)
         Swal.fire('Error de Cálculo', error.message, 'error');
         resultadoOutput.textContent = `Error al procesar la expresión: ${error.message}`;
     }
