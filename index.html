@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+     
+    <meta charset="UTF-8" />
+     
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Conversor de Notación</title>
+
+     
+    <link rel="stylesheet" href="public/css/bootstrap.css" />
+     
+    <link rel="stylesheet" href="public/css/main.css" />
+
+     
+    <script src="public/js/popper.js"></script>
+     
+    <script src="public/js/bootstrap.js"></script>
+     
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+     
+</head>
+
+<body>
+      <div class="container">
+            <h1 class="text-center">Conversor de Notación</h1>
+
+            <p>Ingresa la operación matemática</p>
+                <input type="text" id="operacionInput" value="" class="form-control mb-3">
+            <button onclick="procesarOperacion()" class="btn btn-success w-100">Convertir y Medir</button>
+
+            <div class="resultado">
+                  <h2 class="h4">Resultados y Métricas:</h2>
+                 
+            <pre id="resultadoOutput">Aquí se mostrarán los resultados...</pre>
+               
+        </div>
+          </div>
+
+     
+    <script src="src/game.js"></script>
+
+</body>
+
+</html>

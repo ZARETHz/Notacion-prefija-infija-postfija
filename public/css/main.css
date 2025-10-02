@@ -1,0 +1,80 @@
+/* Esquema de color: Moderno y Oscuro */
+:root {
+    --color-bg-dark: #1e1e1e;       /* Fondo principal oscuro */
+    --color-bg-card: #2d2d2d;       /* Fondo de contenedor (tarjeta) */
+    --color-text-light: #e0e0e0;    /* Color de texto claro */
+    --color-primary: #00bcd4;       /* Cian brillante (para títulos y acentos) */
+    --color-success: #4caf50;       /* Verde para el botón principal */
+    --color-shadow: rgba(0, 0, 0, 0.4);
+    --color-input-border: #444444;
+    --color-output-bg: #222222;     /* Fondo del área de resultados */
+}
+
+body {
+
+    background-color: var(--color-bg-dark); 
+    color: var(--color-text-light); 
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+
+h1 {
+    color: var(--color-primary); 
+    margin-bottom: 30px;
+    font-weight: 300; 
+    text-align: center;
+    letter-spacing: 1px; /* Estilo moderno */
+}
+
+h2.h4 {
+    color: var(--color-text-light); /* Asegurar que el título de resultados se vea bien */
+    margin-top: 0;
+}
+
+p {
+    margin-bottom: 20px;
+    font-size: 1em;
+    color: #b0b0b0; /* Texto ligeramente más suave */
+}
+
+/* --- Input de Operación --- */
+#operacionInput {
+    /* Estilo para Bootstrap form-control en modo oscuro */
+    background-color: #333333;
+    color: var(--color-text-light);
+    border: 1px solid var(--color-input-border);
+    border-radius: 8px; /* Bordes más suaves */
+    padding: 10px 15px;
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+#operacionInput:focus {
+    /* Color de foco que va con el esquema primario */
+    border-color: var(--color-primary); 
+    box-shadow: 0 0 0 0.2rem rgba(0, 188, 212, 0.4); 
+    background-color: #383838;
+}
+
+
+/* --- Sección de Resultados --- */
+.resultado {
+    margin-top: 40px;
+    border-top: 1px solid #3c3c3c; 
+    padding-top: 25px;
+}
+
+#resultadoOutput {
+    background-color: var(--color-output-bg); 
+    color: var(--color-text-light);
+    border: 1px solid #444444;
+    border-radius: 8px;
+    font-family: 'Consolas', 'Courier New', monospace; /* Fuente monoespaciada para código/datos */
+    font-size: 0.95em;
+    padding: 25px;
+    white-space: pre-wrap; 
+    word-break: break-word;
+    line-height: 1.5;
+    overflow-x: auto; /* Permite desplazamiento horizontal si la línea es muy larga */
+}
+
